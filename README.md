@@ -1,1 +1,1 @@
-# Analisador-Sint-tico-em-Java
+# Analisador Sintático em Java
