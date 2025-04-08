@@ -1,0 +1,3 @@
+enum TokenType {
+    ID, PLUS, MINUS, TIMES, DIVIDE, LPAREN, RPAREN, EOF
+}
