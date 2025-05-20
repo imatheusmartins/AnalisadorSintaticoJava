@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+//ANÁLISE LÉXICA
 // Classe responsável por quebrar a entrada em tokens
 class Lexer {
     private String input; // Entrada original (ex: "id + id * (id - id)")
@@ -43,7 +44,21 @@ class Lexer {
                 tokens.add(new Token(TokenType.MINUS, "-"));
                 advance();
 
-            } else if (c == '*') {
+            } else if (Character.isLetter(c)) {
+                StringBuilder sb = new StringBuilder();
+                while (Character.isLetterOrDigit(currentChar())) {
+                    sb.append(currentChar());
+                    advance();
+                }
+                String word = sb.toString();
+                if (word.equals("int")) {
+                    tokens.add(new Token(TokenType.INT, word));
+                } else {
+                    tokens.add(new Token(TokenType.ID, word));
+                }
+            }
+
+            else if (c == '*') {
                 tokens.add(new Token(TokenType.TIMES, "*"));
                 advance();
 
@@ -61,6 +76,9 @@ class Lexer {
 
             } else if (Character.isLetter(c)) {
                 // Se for letra (início de identificador), continua lendo letras/dígitos
+
+                // Com isso, o alfabeto é definido por letras e números, se tentar fazer a soma
+                // de caracteres, por exemplo, é lançado um erro.
                 StringBuilder sb = new StringBuilder();
                 while (Character.isLetterOrDigit(currentChar())) {
                     sb.append(currentChar());
